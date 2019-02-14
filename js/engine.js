@@ -13,6 +13,7 @@
  * writing app.js a little simpler to work with.
  */
 
+//
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -22,7 +23,8 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        id;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -63,7 +65,7 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        player.reset();
         lastTime = Date.now();
         main();
     }
@@ -90,10 +92,10 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        // allEnemies.forEach(function(enemy) {
-        //     enemy.update(dt);
-        // });
-        // player.update();
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);
+        });
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -149,18 +151,10 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        // allEnemies.forEach(function(enemy) {
-        //     enemy.render();
-        // });
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
         player.render();
-    }
-
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
-     */
-    function reset() {
-        // noop
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -183,3 +177,27 @@ var Engine = (function(global) {
      */
     global.ctx = ctx;
 })(this);
+
+// Add modal upon win - code modified from my Udacity assignment 2 (Memory Game)
+let modal = document.querySelector('.modal-box');
+let modalClose = document.querySelector('.close');
+const playAgain = document.querySelector('.playAgain');
+
+function win() {
+  showModal();
+
+}
+
+function showModal() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    player.reset();
+}
+
+modalClose.addEventListener('click', closeModal);
+
+playAgain.addEventListener('click', closeModal);
+
