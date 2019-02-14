@@ -12,8 +12,6 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
-
-//
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -182,11 +180,6 @@ var Engine = (function(global) {
 let modal = document.querySelector('.modal-box');
 let modalClose = document.querySelector('.close');
 const playAgain = document.querySelector('.playAgain');
-
-function win() {
-  showModal();
-
-}
 
 function showModal() {
   modal.style.display = "block";

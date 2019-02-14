@@ -33,7 +33,6 @@ class Player {
     this.sprite = 'images/char-princess-girl.png';
     this.x = this.startX;
     this.y = this.startY;
-    this.gameOver = false;
   }
 
   render() {
@@ -66,7 +65,6 @@ class Player {
   reset() {
     this.x = this.startX;
     this.y = this.startY;
-    this.gameOver = false;
   }
  // When player encounters enemy, restart game.
  // When player reaches water, win!
@@ -77,8 +75,7 @@ class Player {
       }
     }
     if (this.y < 0) {
-      win();
-      this.gameOver = true;
+      showModal();
     }
   }
 }
